@@ -1,5 +1,5 @@
 <a id="menu">&#x2630;</a>
-<div id="index" class="">
+<div id="index" class="hide">
     <div id="wrapper">
     </div>
     <div id="shdw" class="hide2"></div>
@@ -904,7 +904,7 @@
                 <ul class="nested" style="opacity: 0.915;">
                     <li class="bullet2" style="font-size: smaller; font-family: font; padding-top: 5px; color: rgb(200,200,200)"><i>Archived documents</i>
                     </li>
-                    <li class="sub2"><span class="caret"></span><a class="head" href="PLACEHOLDER.jpg" target="blank_">irure qui culpa commodo</a>
+                    <li class="sub2"><span class="caret"></span><a class="head" href="PLACEHOLDER.jpg" target="blank_">irure qui culpa</a>
                         <ul class="nested">
                             <li class="bullet"><a href="PLACEHOLDER.jpg" target="blank_">minim fugiat qui</a>
                             </li>
@@ -1607,9 +1607,9 @@
                 <div id="search2">
                     <form action="search.php" method="get">
                         <p style="text-align: right;">
-                            <input type="text" name="search" size="21" class="src" placeholder="Enter text " style="position: relative; left: 2.5px; top: -2px;">
+                            <input type="text" name="search" size="21" class="src" placeholder="Enter text " id="src2">
                             <span id="aro">
-                                <input id="enter" type="submit" value="SEARCH" class="src" style="background: none; font-size: 13pt; left: 5px;">
+                                <input id="srch" type="submit" value="SEARCH" class="src" style="background: none; font-size: 13pt; left: 5px;">
                             </span>
                         </p>
                     </form>
@@ -1623,13 +1623,17 @@
 
 <script>
     var carets = document.getElementsByClassName("caret"),
-            links = document.getElementsByTagName("a");
+        links = document.getElementsByTagName("a");
 
-    if (window.innerWidth > 550) {
-        index.classList.remove("hide");
-    }
+    window.addEventListener("load", function() {
+        window.innerWidth > 550 ? index.classList.remove("hide") : index.classList.add("hide");
+    });
 
-    window.addEventListener("scroll", function () {
+    window.addEventListener("resize", function() {
+        window.innerWidth > 550 ? index.classList.remove("hide") : index.classList.add("hide");
+    });
+
+    window.addEventListener("scroll", function() {
         if (window.scrollY > 700) {
             tops.style.bottom = "10vh";
         } else {
@@ -1637,13 +1641,13 @@
         }
     });
 
-    menu4.addEventListener("click", function () {
+    menu4.addEventListener("click", function() {
         onoff();
         shdw.classList.add("show2");
         shdw2.classList.add("hide2");
     });
 
-    menu1.addEventListener("click", function () {
+    menu1.addEventListener("click", function() {
         if (list2.querySelector(".top")) {
             list2.classList.remove("top");
         }
@@ -1655,7 +1659,7 @@
         menu1.classList.toggle("caret-down");
     });
 
-    menu2.addEventListener("click", function () {
+    menu2.addEventListener("click", function() {
         if (list1.querySelector(".top")) {
             list1.classList.remove("top");
         }
@@ -1668,12 +1672,12 @@
         shdw.classList.add("show2");
     });
 
-    menu3.addEventListener("click", function () {
+    menu3.addEventListener("click", function() {
         onoff2();
         shdw2.classList.add("show2");
     });
 
-    menuX.addEventListener("click", function () {
+    menuX.addEventListener("click", function() {
         if (list1.querySelector(".top")) {
             list1.classList.remove("top");
         }
@@ -1689,7 +1693,7 @@
         shdw2.classList.add("show2");
     });
 
-    menu.addEventListener("click", function () {
+    menu.addEventListener("click", function() {
         menu3.classList.remove("lite");
         menu4.classList.remove("lite");
         index.style.overflow = "hidden";
@@ -1711,7 +1715,7 @@
     for (var i = 0; i < carets.length; i++) {
         if (carets[i] !== menu1) {
             if (carets[i] !== menu2) {
-                carets[i].addEventListener("click", function () {
+                carets[i].addEventListener("click", function() {
                     var open = this.parentElement.parentElement.querySelectorAll(".nested.active");
                     var down = this.parentElement.parentElement.querySelectorAll(".caret-down");
                     this.parentElement.querySelector(".nested").classList.add("active");
@@ -1727,8 +1731,7 @@
                 });
             }
         }
-    }
-    ;
+    };
 
     function onoff() {
         menu3.classList.remove("lite");
@@ -1760,8 +1763,7 @@
             wrapper.style.width = "100%";
             index.scrollTo(0, 0);
         }
-    }
-    ;
+    };
 
     function onoff2() {
         menu4.classList.remove("lite");
@@ -1792,10 +1794,9 @@
             wrapper.style.width = "100%";
             listX.classList.remove("hide");
         }
-    }
-    ;
+    };
 
-    document.addEventListener("click", function (e) {
+    document.addEventListener("click", function(e) {
         if (e.target.id === "wrapper") {
             menu3.classList.remove("lite");
             menu4.classList.remove("lite");
