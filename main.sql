@@ -19,7 +19,7 @@ CREATE TABLE `images` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Insert data for table `images`
+-- Dumping data for table `images`
 --
 
 INSERT INTO `images` (`name`, `file`, `ID`) VALUES
@@ -2151,7 +2151,7 @@ CREATE TABLE `image_tag` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Insert data for table `image_tag` 
+-- Dumping data for table `image_tag` 
 --
 
 INSERT INTO `image_tag` (`imageID`, `tagID`, `ID`) VALUES
@@ -23286,7 +23286,7 @@ CREATE TABLE `tags` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Insert data for table `tags`
+-- Dumping data for table `tags`
 --
 
 INSERT INTO `tags` (`word`, `ID`) VALUES
@@ -23353,9 +23353,46 @@ INSERT INTO `tags` (`word`, `ID`) VALUES
 ('culpa', 60),
 ('qui', 61);
 
+-- --------------------------------------------------------
+
 --
--- AUTO_INCREMENT for memes table
+-- Table structure for table `sekrit`
 --
 
--- ALTER TABLE `images`
---  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
+CREATE TABLE `sekrit` (
+  `user` varchar(10) NOT NULL,
+  `pass` varchar(64) NOT NULL,
+  `ID` int(11) NOT NULL,
+  PRIMARY KEY(`ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+-- --------------------------------------------------------
+
+--
+-- AUTO_INCREMENT for images table
+--
+
+ALTER TABLE `images`
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT for image_tag table
+--
+
+ALTER TABLE `image_tag`
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT for table `sekrit`
+--
+
+ALTER TABLE `sekrit`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT for image_tag table
+--
+
+ALTER TABLE `tags`
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
