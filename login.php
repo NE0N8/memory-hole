@@ -10,6 +10,16 @@
 </head>
 
 <body style="overflow: hidden; box-shadow: 0 0 25vw black inset, 0 0 25vw black inset !important;">
+   <?php
+   ini_set('session.use_only_cookies', 1);
+   session_start();
+   require_once 'DB.php';
+   if ($cnct->connect_error) {
+      echo "<script>alert('Connection error.');</script>";
+      die("<script>location.replace('login.php');</script>");
+   }
+   include_once("menu.php"); //import menu 
+   ?>
    <div id="content" style="top: 20px;">
       <p class="line"></p>
       <p id="navbar">
@@ -20,14 +30,6 @@
       <p class="line"></p>
       <div id="backGif"></div>
       <?php
-      ini_set('session.use_only_cookies', 1);
-      session_start();
-      require_once 'DB.php';
-      if ($cnct->connect_error) {
-         echo "<script>alert('Connection error.');</script>";
-         die("<script>location.replace('login.php');</script>");
-      }
-      include_once("menu.php"); //import menu 
       if (isset($_SESSION['user']) && isset($_SESSION['pass'])) {
          die("<script>location.replace('index.php');</script>");
       } elseif (isset($_POST['user']) && isset($_POST['pass'])) {
