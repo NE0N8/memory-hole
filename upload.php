@@ -57,20 +57,24 @@ if (isset($_POST['ttl']) && isset($_POST['tag']) && !empty($_FILES['img'])) {   
         imagedestroy($tmp);
         imagedestroy($src);
     }
-    $query = "INSERT INTO images VALUES ('$ttl', '$img', 'NULL')";  //auto-increment record ID
-    $result = $cnct->query($query);
+    $stmt = $cnct->prepare("INSERT INTO images VALUES (?, ?, 'NULL')");  //auto-increment record ID
+    $stmt->bind_param("ss", $ttl, $img);
+    $stmt->execute();
+    $result = $stmt->store_result();
     if (!$result) {
-        echo "INSERT failed: $query<br>" .
-            $cnct->error . "<br><br>";
+        echo "<script>alert('Upload failed.');</script>";
+        die("<script>location.replace('index.php');</script>");
     }
-    $newID = $cnct->insert_id; //get ID of new record
+    $newID = $stmt->insert_id; //get ID of new record
     $tagList = explode(',',$tag);
     foreach ($tagList as $t) {
-        $query = "INSERT INTO image_tag VALUES ('$newID', '$t', 'NULL')";  //insert tags
-        $result = $cnct->query($query);
+        $stmt = $cnct->prepare("INSERT INTO image_tag VALUES (?, ?, 'NULL')");  //insert tags
+        $stmt->bind_param("ii", $newID, $t);
+        $stmt->execute();
+        $result = $stmt->store_result();
         if (!$result) {
-            echo "INSERT failed: $query<br>" .
-                $cnct->error . "<br><br>";
+            echo "<script>alert('Upload failed.');</script>";
+            die("<script>location.replace('index.php');</script>");
         }
     }
 }
