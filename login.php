@@ -24,7 +24,8 @@
       session_start();
       require_once 'DB.php';
       if ($cnct->connect_error) {
-         die($cnct->connect_error);
+         echo "<script>alert('Connection error.');</script>";
+         die("<script>location.replace('login.php');</script>");
       }
       include_once("menu.php"); //import menu 
       if (isset($_SESSION['user']) && isset($_SESSION['pass'])) {
@@ -34,22 +35,24 @@
          $pwd = sanitize($cnct, $_POST['pass']);
          if ($usr == "" || $pwd == "") {
             echo "<script>alert('Enter your username and password.');</script>";
-            die("<script>location.replace('login.php');</script>");         
+            die("<script>location.replace('login.php');</script>");
          }
-         $query = "SELECT * FROM sekrit WHERE user='$usr'";
-         $result = $cnct->query($query);
+         $stmt = $cnct->prepare("SELECT * FROM sekrit WHERE user=?");
+         $stmt->bind_param("s", $usr);
+         $stmt->execute();
+         $result = $stmt->get_result();
          if (!$result) {
-            die($cnct->error);
+            die("Connection error.");
          } elseif ($result->num_rows > 0) {
             $row = $result->fetch_array(MYSQLI_NUM);
             $result->close();
             $salt = "*5&@p%";
-            $token = hash('sha256', "$salt$pwd");
+            $token = hash('sha256', "$salt$pwd$salt");
             if ($token == $row[1]) {
                $_SESSION['user'] = $usr;
                $_SESSION['pass'] = $pwd;
                $_SESSION['id'] = $row[2];
-               $cnct->close();
+               $stmt->close();
                die("<script>location.replace('index.php');</script>");
             } else {
                echo "<script>alert('Incorrect username or password.');</script>";
@@ -72,9 +75,7 @@
          <input type="submit" onclick="location.replace('signup.php');" value="SIGN UP">
       </div>
       <?php
-
       $cnct->close();
-
       function sanitize($cnct, $str) {   //sanitize input - no htmlentities()
          $str = $cnct->real_escape_string($str);
          $str = trim(preg_replace("/[^A-Za-z0-9-]/", "", strip_tags(stripslashes($str))));
