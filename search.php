@@ -14,7 +14,8 @@
     <?php
     require_once "DB.php";
     if ($cnct->connect_error) {
-        die($cnct->connect_error);
+        echo "<script>alert('Connection error.');</script>";
+        die("<script>location.replace('search.php');</script>");
     }
     session_start();
     include_once("menu.php"); //import menu 
@@ -43,14 +44,18 @@
             $src = "";
             if (isset($_GET['search'])) {
                 $src = sanitize($cnct, $_GET['search']);
-                $query = "SELECT DISTINCT i.name, i.file, i.ID FROM images i
+                $query = "%$src%";
+                $stmt = $cnct->prepare("SELECT DISTINCT i.name, i.file, i.ID FROM images i
                     INNER JOIN image_tag it ON i.ID = it.imageID
                     INNER JOIN tags t ON it.tagID = t.ID
-                    WHERE t.word LIKE '%$src%' XOR i.name LIKE '%$src%'
-                    LIMIT 8";
-                $result = $cnct->query($query);
+                    WHERE t.word LIKE ? XOR i.name LIKE ?
+                    LIMIT 8");
+                $stmt->bind_param("ss", $query, $query);
+                $stmt->execute();
+                $result = $stmt->get_result();
                 if (!$result) {
-                    die("Database query failed.");
+                    echo "<script>alert('Database query failed.');</script>";
+                    die("<script>location.replace('signup.php');</script>");
                 }
                 $rows = $result->num_rows;
                 if (!$rows) {
