@@ -10,6 +10,15 @@
 </head>
 
 <body style="overflow: hidden; box-shadow: 0 0 25vw black inset, 0 0 25vw black inset !important;">
+   <?php
+   ini_set('session.use_only_cookies', 1);
+   session_start();
+   require_once 'DB.php';
+   if ($cnct->connect_error) {
+      die("<script>alert('Connection error.');location.replace('signup.php');</script>");
+   }
+   include_once("menu.php"); //import menu 
+   ?>
    <div id="content" style="top: 20px;">
       <p class="line"></p>
       <p id="navbar">
@@ -19,13 +28,6 @@
       </p>
       <p class="line"></p>
       <?php
-      ini_set('session.use_only_cookies', 1);
-      session_start();
-      require_once 'DB.php';
-      if ($cnct->connect_error) {
-         die("<script>alert('Connection error.');location.replace('signup.php');</script>");
-      }
-      include_once("menu.php"); //import menu 
       if (isset($_POST['user']) && isset($_POST['pass1']) && isset($_POST['pass2'])) {
          $usr = trim($cnct->real_escape_string($_POST['user']));
          $pwd1 = trim($cnct->real_escape_string($_POST['pass1']));
