@@ -15,10 +15,11 @@ while ($row = $result->fetch_assoc()) : ?>
         </div><br>
         <?php
         if (isset($_SESSION['user']) && $_SESSION['user'] == "admin") : 
+            $page = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1); 
         //add delete button if logged in as admin
         ?>
             <div class="delet">
-                <form action="search.php" method="post">
+                <form action="<?= $page ?>" method="post">
                     <input type="hidden" name="delete" value="yes">
                     <input type="hidden" name="id" value="<?= $row['ID'] ?>">
                     <input type="submit" value="DELETE">
