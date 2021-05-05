@@ -23,37 +23,39 @@
       session_start();
       require_once 'DB.php';
       if ($cnct->connect_error) {
-         die($cnct->connect_error);
+         die("<script>alert('Connection error.');location.replace('signup.php');</script>");
       }
       include_once("menu.php"); //import menu 
       if (isset($_POST['user']) && isset($_POST['pass1']) && isset($_POST['pass2'])) {
-         $usr = sanitize($cnct, $_POST['user']);
-         $pwd1 = sanitize($cnct, $_POST['pass1']);
-         $pwd2 = sanitize($cnct, $_POST['pass2']);
+         $usr = trim($cnct->real_escape_string($_POST['user']));
+         $pwd1 = trim($cnct->real_escape_string($_POST['pass1']));
+         $pwd2 = trim($cnct->real_escape_string($_POST['pass2']));
          $valid = validate($usr, $pwd1, $pwd2);
          if ($valid == "") {
-            $query = "SELECT * FROM sekrit WHERE user='$usr'";     //check if username exists
-            $result = $cnct->query($query);
+            $stmt = $cnct->prepare("SELECT * FROM sekrit WHERE user=?");     //check if username exists
+            $stmt->bind_param("s", $usr);
+            $stmt->execute();
+            $result = $stmt->get_result();
             if (!$result) {
-               die($cnct->error);
-            } elseif (!$result->num_rows > 0) {     //username not found in DB
+               die("<script>alert('Signup failed.');location.replace('signup.php');</script>");
+            } elseif ($result->num_rows == 0) {     //username not found in DB
                $salt = "*5&@p%";
-               $token = hash('sha256', "$salt$pwd1");
-               $query = "INSERT INTO sekrit VALUES('$usr', '$token', NULL)";
-               $result = $cnct->query($query);
+               $token = hash('sha256', "$salt$pwd1$salt");
+               $stmt = $cnct->prepare("INSERT INTO sekrit VALUES(?, ?, 'NULL')");
+               $stmt->bind_param("ss", $usr, $token);
+               $stmt->execute();
+               $result = $stmt->store_result();
                if (!$result) {
-                  die($cnct->error);
+                  die("<script>alert('Signup failed.');location.replace('signup.php');</script>");
                } else {
-                  $cnct->close();
+                  //$stmt->close();
                   die("<script>location.replace('login.php');</script>");
                }
             } else {
-               echo "<script>alert('Username not available.');</script>";
-               die("<script>location.replace('signup.php');</script>");
+               die("<script>alert('Username not available.');location.replace('signup.php');</script>");
             }
          } else {
-            echo "<script>alert('$valid');</script>";
-            die("<script>location.replace('signup.php');</script>");
+            die("<script>alert('$valid');location.replace('signup.php');</script>");
          }
       }
       ?>
@@ -69,24 +71,21 @@
       </div>
       <?php
       $cnct->close();
-      function sanitize($cnct, $str) {   //sanitize input - no htmlentities()
-         $str = $cnct->real_escape_string($str);
-         $str = trim(preg_replace("/[^A-Za-z0-9-]/", "", strip_tags(stripslashes($str))));
-         return $str;
-      }
       function validate($user, $pass1, $pass2) {
          if ($user == "" || $pass1 == "" || $pass2 == "") {
-            return "Please enter a username and password.\n";
+            return "Please enter a username and password.";
          } elseif (strlen($user) < 5) {
-            return "Username must be at least 5 characters.\n";
+            return "Username must be at least 5 characters.";
          } elseif (preg_match("/[^a-zA-Z0-9]/", $user)) {
-            return "Username must contain letters and numbers only.\n";
+            return "Username must contain letters and numbers only.";
          } elseif ($pass1 != $pass2) {
-            return "Passwords do not match.\n";
+            return "Passwords do not match.";
          } elseif (strlen($pass1) < 5) {
-            return "Password must be at least 5 characters.\n";
+            return "Password must be at least 5 characters.";
          } elseif (!preg_match("/[a-zA-Z]/", $pass1) || !preg_match("/[0-9]/", $pass1)) {
-            return "Password must contain both letters and numbers.\n";
+            return "Password must contain both letters and numbers.";
+         } elseif (preg_match("/[^a-zA-Z0-9]/", $pass1)) {
+            return "Password must contain letters and numbers only.";
          }
          return "";
       }
