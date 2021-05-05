@@ -13,7 +13,8 @@
     <?php
     require_once "DB.php";
     if ($cnct->connect_error) {
-        die($cnct->connect_error);
+        echo "<script>alert('Connection error.');</script>";
+        die("<script>location.replace('index.php');</script>");
     }
     session_start();
     include_once("menu.php");
@@ -72,7 +73,8 @@
             $query = "SELECT * FROM images ORDER BY ID DESC LIMIT 8";
             $result = $cnct->query($query);
             if (!$result) {
-                die("Database access failed.");
+                echo "<script>alert('Database access failed.');</script>";
+                die("<script>location.replace('index.php');</script>");
             } else {
                 include('cell.php');
             }
@@ -107,9 +109,11 @@
             });
         });
         window.addEventListener("scroll", function() {
-            if (window.pageYOffset < 155)
+            if (window.pageYOffset < 155) {
                 title.style.opacity = 1 - window.pageYOffset / 155;
-            if (window.pageYOffset >= 155) title.style.opacity = 0;
+            } else if (window.pageYOffset >= 155) {
+                title.style.opacity = 0;
+            }
         });
     </script>
 </body>
