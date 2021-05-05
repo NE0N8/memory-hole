@@ -185,6 +185,7 @@ input[type="button"] {
   box-shadow: none;
   font-family: font;
   top: -1px;
+  cursor: pointer;
 }
 #aro::before {
   content: "\276F";
