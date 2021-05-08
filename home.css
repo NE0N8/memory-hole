@@ -355,7 +355,7 @@ input:focus {
     0 0 9px rgb(0, 100, 255), 0 0 33px rgb(0, 255, 255);
 }
 .line {
-  z-index: 100;
+  z-index: 10;
   border-bottom: 1.2px solid rgb(200, 200, 200);
   margin-bottom: 10px;
 }
@@ -738,11 +738,11 @@ li {
 }
 #list1 {
   z-index: 2;
-  top: 42px;
+  top: 40px;
 }
 #list2 {
   z-index: 2;
-  top: 82px;
+  top: 81px;
 }
 #list3 {
   top: 78px;
