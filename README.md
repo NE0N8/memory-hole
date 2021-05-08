@@ -8,4 +8,10 @@ Newly added in version 3.0 is a user account system written in PHP, featuring se
 <br><br>
 With the client's permission, this code is being made available for public use on the condition that all references to the previously mentioned files are removed. Any such information has been programatically overwritten with placeholder text using a custom PHP script, which is included with the main website files to simplify the removal of this text for reuse in other websites. All content is freely available under the GPL v3.
 <br><br>
-<img width="793" alt="home" src="https://user-images.githubusercontent.com/80986857/114496465-01398280-9bee-11eb-8909-d4222c85772b.png">
+<img width="799" alt="1" src="https://user-images.githubusercontent.com/80986857/117548043-c534ea00-b000-11eb-9ce0-44f0e1284019.png">
+<br>
+<img width="572" alt="3" src="https://user-images.githubusercontent.com/80986857/117548067-e09ff500-b000-11eb-81b1-ebd06a58a4cd.png">
+<br>
+<img width="868" alt="4" src="https://user-images.githubusercontent.com/80986857/117548078-eb5a8a00-b000-11eb-9756-4bf53c3395e3.png">
+<br>
+<img width="954" alt="2" src="https://user-images.githubusercontent.com/80986857/117548083-f2819800-b000-11eb-9621-fcd7471633d7.png">
