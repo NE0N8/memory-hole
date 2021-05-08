@@ -81,7 +81,7 @@ if (isset($_POST['ttl']) && isset($_POST['tag']) && !empty($_FILES['img'])) {   
 function cleanImg($cnct, $str) {   //sanitize input - no htmlentities()
     $str = $cnct->real_escape_string($str);
     $str = trim(strip_tags(stripslashes($str)));
-    $str = preg_replace("/[^A-Za-z0-9.-]/", "", $str);
+    $str = preg_replace("/[^A-Za-z0-9.\s+-]/", "", $str);
     return $str;
 }
 function CSV($cnct, $str) {     //convert input to CSV format
