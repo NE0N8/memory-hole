@@ -108,13 +108,13 @@
                 alert("No response from server.");
             });
         });
-        window.addEventListener("scroll", function() {
-            if (window.pageYOffset < 155) {
+        if (window.pageYOffset < 155) {
+            window.addEventListener("scroll", function() {
                 title.style.opacity = 1 - window.pageYOffset / 155;
-            } else if (window.pageYOffset >= 155) {
-                title.style.opacity = 0;
-            }
-        });
+            });
+        } else {
+            window.removeEventListener("scroll");
+        };
     </script>
 </body>
 
