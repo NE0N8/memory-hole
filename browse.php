@@ -28,7 +28,7 @@
             <div><br>
                 <p data-text="F I L E S" class="sections2" style="text-shadow: none;">F I L E S</p>
                 <ul class="cell2" style="margin-bottom: 35px;">
-                    <li class="label2" style="font-size: smaller;"><i>Archived documents</i>
+                    <li class="label2" style="font-size: 13pt; font-style: italic; left: -27px; width: 80vw;"><i>Archived documents</i>
                     </li>
                     <li class="sub2"><span class="caret"></span><a class="head" href="PLACEHOLDER.jpg" target="blank_">aliquip est in reprehenderit</a>
                         <ul class="nested">
@@ -717,7 +717,7 @@
                 </ul>
                 <p data-text="L I N K S" class="sections2" style="text-shadow: none;">L I N K S</p>
                 <ul class="cell2">
-                    <li class="label2" style="font-size: smaller;"><i>External resources</i>
+                    <li class="label2" style="font-size: 13pt; font-style: italic; left: -27px; width: 80vw;"><i>External resources</i>
                     </li>
                     <li class="sub2"><span class="caret top"></span><a class="head" href="PLACEHOLDER.jpg" target="blank_">irure mollit elit quis</a>
                         <ul class="nested">
