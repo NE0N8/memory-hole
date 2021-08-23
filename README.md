@@ -6,7 +6,7 @@ Originally developed for an anonymous client, this website contained roughly 3 G
 <br><br>
 Newly added in version 3.0 is a user account system written in PHP, featuring secure login and registration processes, upload functionality and post deletion for administrator accounts. Several improvements to performance and UX design have also been made, while the development of increased security measures is ongoing.
 <br><br>
-With the client's permission, this code is being made available for public use on the condition that all references to the previously mentioned files are removed. Any such information has been programatically overwritten with placeholder text using a custom PHP script, which is included with the main website files to simplify the removal of this text for reuse in other websites. All content is freely available under the GPL v3.
+With the client's permission, this code is being made available for public use on the condition that all references to the previously mentioned files are removed. Any such information has been programatically overwritten with placeholder text using a custom PHP script, which is included with the main website files to simplify the removal of this text for reuse in other websites. All content is freely available under version 3 of the GPL.
 <br><br>
 <img width="799" alt="1" src="https://user-images.githubusercontent.com/80986857/117548043-c534ea00-b000-11eb-9ce0-44f0e1284019.png">
 <br><br>
