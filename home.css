@@ -88,13 +88,13 @@ body {
   padding-right: 30px;
 }
 .label2 {
-  font-family: label !important;
-  color: rgb(166, 166, 166);
-  font-size: 14pt;
+  font-family: outrun !important;
   font-style: italic;
-  letter-spacing: 5.5px;
+  color: rgb(166, 166, 166);
+  font-size: 15.3pt;
+  letter-spacing: 6.4px;
   text-decoration: none;
-  line-height: 140%;
+  line-height: 135%;
   padding: 5px 0 5px 0;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
@@ -738,7 +738,7 @@ li {
 }
 #list1 {
   z-index: 2;
-  top: 40px;
+  top: 38px;
 }
 #list2 {
   z-index: 2;
@@ -900,7 +900,7 @@ input[type="file"] {
 }
 @font-face {
   font-family: "outrun";
-  src: url("./Outrun future Bold Italic.otf");
+  src: url("./CyberwayRiders-lg97d.ttf");
 }
 @font-face {
   font-family: "tele";
