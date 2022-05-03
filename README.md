@@ -1,6 +1,5 @@
 # memory-hole
-A website template for serving dynamic content with PHP and Javascript. 
-<br>Live demo: http://memoryhole.synergize.co/
+A website template for serving dynamic content with PHP and Javascript.
 <br><br>
 Originally developed for an anonymous client, this website contained roughly 3 GB of data; including 340 archived documents, more than 250 links to other websites, and over 2100 images. The website features a PHP-based search function that queries a MySQL database, a drop-down menu with interactive elements written in Javascript, and a responsive mobile-optimized design using custom CSS.
 <br><br>
